@@ -12,13 +12,13 @@
 [![Unicorn](https://img.shields.io/badge/nyancat-approved-ff69b4.svg)](https://www.youtube.com/watch?v=QH2-TGUlwu4)
 [![Tweet](https://img.shields.io/badge/twitter-share-76abec.svg)](https://goo.gl/QJzJu1)
 
-> Record your terminal and generate animated gif images or share a web player link [www.terminalizer.com](https://www.terminalizer.com)
+> บันทึกเทอร์มินัลของคุณและสร้างภาพ GIF แอนิเมชันหรือแชร์ลิงก์ web player [www.terminalizer.com](https://www.terminalizer.com)
 
 <p align="center"><img src="/img/demo.gif?raw=true"/></p>
 
-Built to be jusT cOol 👌🦄 !
+สร้างขึ้นเพื่อให้เท่ห์สุดๆ 👌🦄 !
 
-> If you think so, support me with a `star` and a `follow` 😘
+> หากคิดเช่นนั้น สนับสนุนด้วย `star` และ `follow` กันนะ 😘
 
 ---
 
@@ -26,16 +26,17 @@ Built to be jusT cOol 👌🦄 !
 
 ---
 
-# Table of Contents
+# สารบัญ
 
 - [Terminalizer](#terminalizer)
-- [Table of Contents](#table-of-contents)
-- [Features](#features)
-- [What's Next](#whats-next)
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-  - [Compression](#compression)
-- [Usage](#usage)
+- [สารบัญ](#สารบัญ)
+- [คุณสมบัติ](#คุณสมบัติ)
+- [สิ่งที่กำลังมา](#สิ่งที่กำลังมา)
+- [การติดตั้ง](#การติดตั้ง)
+  - [การติดตั้งบน Windows (แก้ไขสำหรับ Version นี้)](#การติดตั้งบน-windows-แก้ไขสำหรับ-version-นี้)
+- [เริ่มต้นใช้งาน](#เริ่มต้นใช้งาน)
+  - [การบีบอัด](#การบีบอัด)
+- [การใช้งาน](#การใช้งาน)
   - [Init](#init)
   - [Config](#config)
   - [Record](#record)
@@ -43,97 +44,139 @@ Built to be jusT cOol 👌🦄 !
   - [Render](#render)
   - [Share](#share)
   - [Generate](#generate)
-- [Configurations](#configurations)
-  - [Recording](#recording)
-  - [Delays](#delays)
-  - [GIF](#gif)
-  - [Terminal](#terminal)
-  - [Theme](#theme)
+- [การกำหนดค่า](#การกำหนดค่า)
+  - [การบันทึก](#การบันทึก)
+  - [ความล่าช้า](#ความล่าช้า)
+  - [ธีม](#ธีม)
   - [Watermark](#watermark)
-  - [Frame Box](#frame-box)
-    - [Null Frame](#null-frame)
-    - [Window Frame](#window-frame)
-    - [Floating Frame](#floating-frame)
-    - [Solid Frame](#solid-frame)
-    - [Solid Frame Without Title](#solid-frame-without-title)
-    - [Styling Hint](#styling-hint)
-- [FAQ](#faq)
-  - [How to support ZSH](#how-to-support-zsh)
-- [Issues](#issues)
-- [License](#license)
+  - [กรอบหน้าต่าง](#กรอบหน้าต่าง)
+    - [กรอบแบบ Null](#กรอบแบบ-null)
+    - [กรอบแบบ Window](#กรอบแบบ-window)
+    - [กรอบแบบ Floating](#กรอบแบบ-floating)
+    - [กรอบแบบ Solid](#กรอบแบบ-solid)
+    - [กรอบแบบ Solid ไม่มีชื่อ](#กรอบแบบ-solid-ไม่มีชื่อ)
+    - [เคล็ดลับการปรับแต่ง](#เคล็ดลับการปรับแต่ง)
+- [คำถามที่พบบ่อย](#คำถามที่พบบ่อย)
+  - [วิธีใช้งาน ZSH](#วิธีใช้งาน-zsh)
+- [ปัญหาที่พบ](#ปัญหาที่พบ)
+- [ลิขสิทธิ์](#ลิขสิทธิ์)
 
-# Features
+# คุณสมบัติ
 
-- Highly customizable.
-- Cross platform (Linux, Windows, MacOS).
-- Custom `window frames`.
-- Custom `font`.
-- Custom `colors`.
-- Custom `styles` with `CSS`.
-- Watermark.
-- Edit frames and adjust delays before rendering.
-- Skipping frames by a step value to reduce the number of rendered frames.
-- Render images with texts on them instead of capturing your screen for better quality.
-- The ability to configure:
-  - The command to capture (bash, powershell.exe, yourOwnCommand, etc)
-  - The current working directory.
-  - Explicit values for the number of cols and rows.
-  - GIF quality and repeating.
-  - Frames delays.
-  - The max idle time between frames.
-  - Cursor style.
-  - Font.
-  - Font size.
-  - Line height.
-  - Letter spacing.
-  - Theme.
+- ปรับแต่งได้อย่างหลากหลาย
+- รองรับหลายแพลตฟอร์ม (Linux, Windows, MacOS)
+- `กรอบหน้าต่าง` แบบกำหนดเอง
+- `ฟอนต์` แบบกำหนดเอง
+- `สี` แบบกำหนดเอง
+- `สไตล์` แบบกำหนดเองด้วย `CSS`
+- Watermark
+- แก้ไขเฟรมและปรับความล่าช้าก่อนการเรนเดอร์
+- ข้ามเฟรมด้วยค่า step เพื่อลดจำนวนเฟรมที่เรนเดอร์
+- เรนเดอร์รูปภาพพร้อมข้อความแทนการจับภาพหน้าจอเพื่อคุณภาพที่ดีกว่า
+- ความสามารถในการกำหนดค่า:
+  - คำสั่งที่จะจับภาพ (bash, powershell.exe, คำสั่งของคุณเอง ฯลฯ)
+  - ไดเรกทอรีการทำงานปัจจุบัน
+  - ค่าจำนวนคอลัมน์และแถวที่ชัดเจน
+  - คุณภาพและการวนซ้ำของ GIF
+  - ความล่าช้าของเฟรม
+  - เวลาหยุดสูงสุดระหว่างเฟรม
+  - สไตล์เคอร์เซอร์
+  - ฟอนต์
+  - ขนาดฟอนต์
+  - ความสูงของบรรทัด
+  - ระยะห่างระหว่างตัวอักษร
+  - ธีม
 
-# What's Next
+# สิ่งที่กำลังมา
 
-- The `Generate` command to generate a web player for a recording file.
-- Support `apt-get`, `yum`, `brew` installation.
+- คำสั่ง `Generate` เพื่อสร้าง web player สำหรับไฟล์บันทึก
+- รองรับการติดตั้งด้วย `apt-get`, `yum`, `brew`
 
-# Installation
+# การติดตั้ง
 
-You need to install [Node.js](https://nodejs.org/en/download/) first, then install the tool globally using this command:
+คุณต้องติดตั้ง [Node.js](https://nodejs.org/en/download/) ก่อน จากนั้นติดตั้งเครื่องมือแบบ global ด้วยคำสั่งนี้:
 
 ```bash
 yarn global add terminalizer
 ```
 
-<p align="center"><img src="/img/install.gif?raw=true"/></p>
+![การติดตั้ง](/img/install.gif?raw=true)
 
-> Still facing an issue? Check the [Issues](#issues) section or open a new issue.
+> ยังคงมีปัญหาอยู่หรือไม่? ตรวจสอบส่วน [ปัญหาที่พบ](#ปัญหาที่พบ) หรือเปิด issue ใหม่
 
-The installation should be very smooth with Node.js v4-v16. For newer versions, if the installation is failed, you may need to install the development tools to build the `C++` add-ons. Check [node-gyp](https://github.com/nodejs/node-gyp#installation).
+การติดตั้งควรจะราบรื่นกับ Node.js v4-v16 สำหรับเวอร์ชันใหม่กว่า หากการติดตั้งล้มเหลว คุณอาจต้องติดตั้งเครื่องมือพัฒนาเพื่อ build `C++` add-ons ตรวจสอบ [node-gyp](https://github.com/nodejs/node-gyp#installation)
 
-# Getting Started
+## การติดตั้งบน Windows (แก้ไขสำหรับ Version นี้)
 
-Start recording your terminal using the `record` command.
+⚠️ **หมายเหตุสำหรับผู้ใช้ Windows**: Version นี้ได้ทำการแก้ไขเพื่อให้ทำงานบน Windows ได้:
+
+### วิธีการติดตั้งและใช้งาน:
+
+1. **Clone หรือ Download โปรเจ็คนี้**
+```bash
+git clone https://github.com/faressoft/terminalizer.git
+cd terminalizer
+```
+
+2. **ติดตั้ง Dependencies**
+```bash
+npm install --ignore-scripts
+```
+
+3. **Build โปรเจ็ค**
+```bash
+npm run build
+```
+
+4. **ใช้งาน Terminalizer**
+```bash
+# ใช้คำสั่งผ่าน Node.js โดยตรง
+node bin/app.js --help
+
+# หรือสร้าง alias ใน PowerShell profile
+echo 'function terminalizer { node "$(Get-Location)/bin/app.js" @args }' >> $PROFILE
+```
+
+### ข้อจำกัดบน Windows:
+- ฟังก์ชัน **Record** อาจไม่ทำงานเต็มที่เนื่องจาก node-pty dependency ถูก disable
+- ฟังก์ชัน **Render**, **Play**, **Generate** ใช้งานได้ปกติ
+- สำหรับการ record จริง แนะนำให้ใช้บน Linux/Mac หรือ WSL
+
+### การใช้งานแทน Record บน Windows:
+```bash
+# สร้างไฟล์ YAML ด้วยตนเอง แล้วใช้ Play และ Render
+node bin/app.js config
+node bin/app.js play existing-recording.yml
+node bin/app.js render existing-recording.yml
+```
+
+# เริ่มต้นใช้งาน
+
+เริ่มบันทึกเทอร์มินัลของคุณโดยใช้คำสั่ง `record`
 
 ```bash
 terminalizer record demo
 ```
 
-A file called `demo.yml` will be created in the current directory. You can open it using any editor to edit the configurations and the recorded frames. You can replay your recording using the `play` command.
+ไฟล์ชื่อ `demo.yml` จะถูกสร้างขึ้นในไดเรกทอรีปัจจุบัน คุณสามารถเปิดด้วยโปรแกรมแก้ไขใดๆ เพื่อแก้ไขการกำหนดค่าและเฟรมที่บันทึกไว้ คุณสามารถเล่นการบันทึกของคุณใหม่โดยใช้คำสั่ง `play`
 
 ```bash
 terminalizer play demo
 ```
 
-Now let's render our recording as an animated gif.
+ตอนนี้มาเรนเดอร์การบันทึกของเราเป็น GIF แอนิเมชันกัน
 
 ```bash
 terminalizer render demo
 ```
 
-## Compression
+## การบีบอัด
 
-GIF compression is not implemented yet. For now we recommend [https://gifcompressor.com](https://gifcompressor.com).
+การบีบอัด GIF ยังไม่ได้ถูกใช้งาน ตอนนี้เราแนะนำ [https://gifcompressor.com](https://gifcompressor.com)
 
-# Usage
+# การใช้งาน
 
-> You can use the `--help` option to get more details about the commands and their options
+> คุณสามารถใช้ตัวเลือก `--help` เพื่อดูรายละเอียดเพิ่มเติมเกี่ยวกับคำสั่งและตัวเลือกต่างๆ
 
 ```bash
 terminalizer <command> [options]
@@ -141,7 +184,7 @@ terminalizer <command> [options]
 
 ## Init
 
-> Create a global config directory
+> สร้างไดเรกทอรีกำหนดค่าส่วนกลาง
 
 ```bash
 terminalizer init
@@ -149,7 +192,7 @@ terminalizer init
 
 ## Config
 
-> Generate a config file in the current directory
+> สร้างไฟล์กำหนดค่าในไดเรกทอรีปัจจุบัน
 
 ```bash
 terminalizer config
@@ -157,61 +200,61 @@ terminalizer config
 
 ## Record
 
-> Record your terminal and create a recording file
+> บันทึกเทอร์มินัลของคุณและสร้างไฟล์บันทึก
 
 ```bash
 terminalizer record <recordingFile>
 ```
 
-Options
+ตัวเลือก
 
 ```
--c, --config        Overwrite the default configurations                                  [string]
--d, --command       The command to be executed                            [string] [default: null]
--k, --skip-sharing  Skip sharing and showing the sharing prompt message [boolean] [default: false]
+-c, --config        เขียนทับการกำหนดค่าเริ่มต้น                                [string]
+-d, --command       คำสั่งที่จะถูกดำเนินการ                         [string] [default: null]
+-k, --skip-sharing  ข้ามการแชร์และแสดงข้อความแจ้งการแชร์    [boolean] [default: false]
 ```
 
-Examples
+ตัวอย่าง
 
 ```
-terminalizer record foo                      Start recording and create a recording file called foo.yml
-terminalizer record foo --config config.yml  Start recording with your own configurations
+terminalizer record foo                      เริ่มบันทึกและสร้างไฟล์บันทึกชื่อ foo.yml
+terminalizer record foo --config config.yml  เริ่มบันทึกด้วยการกำหนดค่าของคุณเอง
 ```
 
 ## Play
 
-> Play a recording file on your terminal
+> เล่นไฟล์บันทึกบนเทอร์มินัลของคุณ
 
 ```bash
 terminalizer play <recordingFile>
 ```
 
-Options
+ตัวเลือก
 
 ```
--r, --real-timing   Use the actual delays between frames as recorded        [boolean] [default: false]
--s, --speed-factor  Speed factor, multiply the frames delays by this factor [number] [default: 1]
+-r, --real-timing   ใช้ความล่าช้าจริงระหว่างเฟรมตามที่บันทึกไว้  [boolean] [default: false]
+-s, --speed-factor  ตัวคูณความเร็ว คูณความล่าช้าของเฟรมด้วยตัวคูณนี้ [number] [default: 1]
 ```
 
 ## Render
 
-> Render a recording file as an animated gif image
+> เรนเดอร์ไฟล์บันทึกเป็นภาพ GIF แอนิเมชัน
 
 ```bash
 terminalizer render <recordingFile>
 ```
 
-Options
+ตัวเลือก
 
 ```
--o, --output   A name for the output file                                      [string]
--q, --quality  The quality of the rendered image (1 - 100)                     [number]
--s, --step     To reduce the number of rendered frames (step > 1) [number] [default: 1]
+-o, --output   ชื่อสำหรับไฟล์เอาต์พุต                                    [string]
+-q, --quality  คุณภาพของภาพที่เรนเดอร์ (1 - 100)                      [number]
+-s, --step     เพื่อลดจำนวนเฟรมที่เรนเดอร์ (step > 1)   [number] [default: 1]
 ```
 
 ## Share
 
-> Upload a recording file and get a link for an online player
+> อัปโหลดไฟล์บันทึกและรับลิงก์สำหรับ online player
 
 ```bash
 terminalizer share <recordingFile>
@@ -219,71 +262,71 @@ terminalizer share <recordingFile>
 
 ## Generate
 
-> Generate a web player for a recording file
+> สร้าง web player สำหรับไฟล์บันทึก
 
 ```bash
 terminalizer generate <recordingFile>
 ```
 
-# Configurations
+# การกำหนดค่า
 
-The default `config.yml` file is stored under the root directory of the project. Execute the below command to copy it to your current directory.
+ไฟล์ `config.yml` เริ่มต้นถูกเก็บไว้ภายใต้ไดเรกทอรีรูทของโปรเจ็ค ดำเนินคำสั่งด้านล่างเพื่อคัดลอกไปยังไดเรกทอรีปัจจุบันของคุณ
 
-> Use any editor to edit the copied `config.yml`, then use the `-c` option to override the default one.
+> ใช้โปรแกรมแก้ไขใดๆ เพื่อแก้ไข `config.yml` ที่คัดลอกมา จากนั้นใช้ตัวเลือก `-c` เพื่อเขียนทับค่าเริ่มต้น
 
 ```bash
 terminalizer config
 ```
 
-> RECOMMENDED, use the `init` command to create a global config file to be used instead of the default one.
+> แนะนำ ใช้คำสั่ง `init` เพื่อสร้างไฟล์กำหนดค่าส่วนกลางที่จะใช้แทนค่าเริ่มต้น
 
 ```bash
 terminalizer init
 ```
 
-For Linux and MacOS, the created directory is located under the home directory `~/config/terminalizer`. For Windows, it is located under the `AppData`.
+สำหรับ Linux และ MacOS ไดเรกทอรีที่สร้างขึ้นจะอยู่ภายใต้ไดเรกทอรีหลัก `~/config/terminalizer` สำหรับ Windows จะอยู่ภายใต้ `AppData`
 
-## Recording
+## การบันทึก
 
-- `command`: Specify a command to be executed like `/bin/bash -l`, `ls`, or any other command. The default is `bash` for `Linux` or `powershell.exe` for `Windows`.
-- `cwd`: Specify the current working directory path. The default is the current working directory path.
-- `env`: Export additional ENV variables, to be read by your scripts when starting the recording.
-- `cols`: Explicitly set the number of columns or use `auto` to take the current number of columns of your shell.
-- `rows`: Explicitly set the number of rows or use `auto` to take the current number of rows of your shell.
+- `command`: ระบุคำสั่งที่จะดำเนินการเช่น `/bin/bash -l`, `ls`, หรือคำสั่งอื่นใด ค่าเริ่มต้นคือ `bash` สำหรับ `Linux` หรือ `powershell.exe` สำหรับ `Windows`
+- `cwd`: ระบุเส้นทางไดเรกทอรีการทำงานปัจจุบัน ค่าเริ่มต้นคือเส้นทางไดเรกทอรีการทำงานปัจจุบัน
+- `env`: ส่งออกตัวแปร ENV เพิ่มเติม เพื่อให้อ่านโดยสคริปต์ของคุณเมื่อเริ่มการบันทึก
+- `cols`: กำหนดจำนวนคอลัมน์อย่างชัดเจนหรือใช้ `auto` เพื่อใช้จำนวนคอลัมน์ปัจจุบันของ shell ของคุณ
+- `rows`: กำหนดจำนวนแถวอย่างชัดเจนหรือใช้ `auto` เพื่อใช้จำนวนแถวปัจจุบันของ shell ของคุณ
 
-## Delays
+## ความล่าช้า
 
-- `frameDelay`: The delay between frames in ms. If the value is `auto` use the actual recording delays.
-- `maxIdleTime`: Maximum delay between frames in ms. Ignored if the `frameDelay` isn't set to `auto`. Set to `auto` to prevent limiting the max idle time.
+- `frameDelay`: ความล่าช้าระหว่างเฟรมเป็นมิลลิวินาที หากค่าเป็น `auto` ใช้ความล่าช้าในการบันทึกจริง
+- `maxIdleTime`: ความล่าช้าสูงสุดระหว่างเฟรมเป็นมิลลิวินาที จะถูกละเว้นหาก `frameDelay` ไม่ได้ตั้งเป็น `auto` ตั้งเป็น `auto` เพื่อป้องกันการจำกัดเวลาหยุดสูงสุด
 
 ## GIF
 
-- `quality`: The quality of the generated GIF image (1 - 100).
-- `repeat`: Amount of times to repeat GIF:
-  - If value is `-1`, play once.
-  - If value is `0`, loop indefinitely.
-  - If value is a positive number, loop `n` times.
+- `quality`: คุณภาพของภาพ GIF ที่สร้างขึ้น (1 - 100)
+- `repeat`: จำนวนครั้งในการวนซ้ำ GIF:
+  - หากค่าเป็น `-1` เล่นครั้งเดียว
+  - หากค่าเป็น `0` วนซ้ำไม่จำกัด
+  - หากค่าเป็นจำนวนบวก วนซ้ำ `n` ครั้ง
 
-## Terminal
+## เทอร์มินัล
 
-- `cursorStyle`: Cursor style can be one of `block`, `underline`, or `bar`.
-- `fontFamily`: You can use any font that is installed on your machine like `Monaco` or `Lucida Console` (CSS-like list).
-- `fontSize`: The size of the font in pixels.
-- `lineHeight`: The height of lines in pixels.
-- `letterSpacing`: The spacing between letters in pixels.
+- `cursorStyle`: สไตล์เคอร์เซอร์สามารถเป็น `block`, `underline`, หรือ `bar`
+- `fontFamily`: คุณสามารถใช้ฟอนต์ใดๆ ที่ติดตั้งในเครื่องของคุณเช่น `Monaco` หรือ `Lucida Console` (รายการแบบ CSS)
+- `fontSize`: ขนาดของฟอนต์เป็นพิกเซล
+- `lineHeight`: ความสูงของบรรทัดเป็นพิกเซล
+- `letterSpacing`: ระยะห่างระหว่างตัวอักษรเป็นพิกเซล
 
-## Theme
+## ธีม
 
-You can set the colors of your terminal using one of the CSS formats:
+คุณสามารถตั้งค่าสีของเทอร์มินัลของคุณโดยใช้รูปแบบ CSS อย่างใดอย่างหนึ่ง:
 
-- Hex: `#FFFFFF`.
-- RGB: `rgb(255, 255, 255)`.
-- HSL: `hsl(0, 0%, 100%)`.
-- Name: `white`, `red`, `blue`.
+- Hex: `#FFFFFF`
+- RGB: `rgb(255, 255, 255)`
+- HSL: `hsl(0, 0%, 100%)`
+- Name: `white`, `red`, `blue`
 
-> You can use the value `transparent` too.
+> คุณสามารถใช้ค่า `transparent` ได้เช่นกัน
 
-The default colors that are assigned to the terminal colors are:
+สีเริ่มต้นที่กำหนดให้กับสีเทอร์มินัลคือ:
 
 - background: ![#ffffff](https://placehold.it/15/ffffff/000000?text=+) `transparent`
 - foreground: ![#afafaf](https://placehold.it/15/afafaf/000000?text=+) `#afafaf`
@@ -307,13 +350,13 @@ The default colors that are assigned to the terminal colors are:
 
 ## Watermark
 
-You can add a watermark logo to your generated GIF images.
+คุณสามารถเพิ่มโลโก้ลายน้ำในภาพ GIF ที่สร้างขึ้น
 
 <p align="center"><img src="/img/watermark.gif?raw=true"/></p>
 
 ```
 watermark:
-  imagePath: AbsolutePathOrURL
+  imagePath: เส้นทางสัมบูรณ์หรือ URL
   style:
     position: absolute
     right: 15px
@@ -322,24 +365,24 @@ watermark:
     opacity: 0.9
 ```
 
-- `watermark.imagePath`: An absolute path for the image on your machine or a URL.
-- `watermark.style`: Apply CSS styles (camelCase) to the watermark image, like resizing it.
+- `watermark.imagePath`: เส้นทางสัมบูรณ์สำหรับภาพในเครื่องของคุณหรือ URL
+- `watermark.style`: ใช้สไตล์ CSS (camelCase) กับภาพลายน้ำ เช่น การปรับขนาด
 
-## Frame Box
+## กรอบหน้าต่าง
 
-Terminalizer comes with predefined frames that you can use to make your GIF images look cool.
+Terminalizer มาพร้อมกับกรอบที่กำหนดไว้ล่วงหน้าที่คุณสามารถใช้เพื่อทำให้ภาพ GIF ของคุณดูเท่
 
-- `frameBox.type`: Can be `null`, `window`, `floating`, or `solid`.
-- `frameBox.title`: To display a title for the frame or `null`.
-- `frameBox.style`: To apply custom CSS styles or to override the current ones.
+- `frameBox.type`: สามารถเป็น `null`, `window`, `floating`, หรือ `solid`
+- `frameBox.title`: เพื่อแสดงชื่อเรื่องของกรอบหรือ `null`
+- `frameBox.style`: เพื่อใช้สไตล์ CSS แบบกำหนดเองหรือเพื่อเขียนทับสไตล์ปัจจุบัน
 
-### Null Frame
+### กรอบแบบ Null
 
-No frame, just your recording.
+ไม่มีกรอบ เพียงแค่การบันทึกของคุณ
 
 <p align="center"><img src="/img/frames/null.gif?raw=true"/></p>
 
-> Don't forget to add a `backgroundColor` under `style`.
+> อย่าลืมเพิ่ม `backgroundColor` ภายใต้ `style`
 
 ```
 frameBox:
@@ -349,7 +392,7 @@ frameBox:
     backgroundColor: black
 ```
 
-### Window Frame
+### กรอบแบบ Window
 
 <p align="center"><img src="/img/frames/window.gif?raw=true"/></p>
 
@@ -360,7 +403,7 @@ frameBox:
   style: []
 ```
 
-### Floating Frame
+### กรอบแบบ Floating
 
 <p align="center"><img src="/img/frames/floating.gif?raw=true"/></p>
 
@@ -371,7 +414,7 @@ frameBox:
   style: []
 ```
 
-### Solid Frame
+### กรอบแบบ Solid
 
 <p align="center"><img src="/img/frames/solid.gif?raw=true"/></p>
 
@@ -382,7 +425,7 @@ frameBox:
   style: []
 ```
 
-### Solid Frame Without Title
+### กรอบแบบ Solid ไม่มีชื่อ
 
 <p align="center"><img src="/img/frames/solid_without_title.gif?raw=true"/></p>
 
@@ -393,9 +436,9 @@ frameBox:
   style: []
 ```
 
-### Styling Hint
+### เคล็ดลับการปรับแต่ง
 
-You can disable the default shadows and margins.
+คุณสามารถปิดเงาและระยะขอบเริ่มต้นได้
 
 <p align="center"><img src="/img/frames/solid_without_title_without_shadows.gif?raw=true"/></p>
 
@@ -408,42 +451,42 @@ frameBox:
     margin: 0px
 ```
 
-# FAQ
+# คำถามที่พบบ่อย
 
-### How to support ZSH
+## วิธีใช้งาน ZSH
 
-The default command that gets recorded for Linux is `bash -l`. You need to change the default command to `zsh`.
+คำสั่งเริ่มต้นที่ถูกบันทึกสำหรับ Linux คือ `bash -l` คุณต้องเปลี่ยนคำสั่งเริ่มต้นเป็น `zsh`
 
-- Generate a config file in the current directory
+- สร้างไฟล์กำหนดค่าในไดเรกทอรีปัจจุบัน
 
 ```bash
 terminalizer config
 ```
 
-- Open the generated config file in your preferred editor.
-- Change the `command` to `zsh`:
+- เปิดไฟล์กำหนดค่าที่สร้างขึ้นด้วยโปรแกรมแก้ไขที่คุณต้องการ
+- เปลี่ยน `command` เป็น `zsh`:
 
 ```
 command: zsh
 ```
 
-- You may need to change the font, check the font that is used in your terminal:
+- คุณอาจต้องเปลี่ยนฟอนต์ ตรวจสอบฟอนต์ที่ใช้ในเทอร์มินัลของคุณ:
 
 ```
 fontFamily: "Meslo for Powerline, Meslo LG M for Powerline"
 ```
 
-- Use the `-c` option to override the config file:
+- ใช้ตัวเลือก `-c` เพื่อเขียนทับไฟล์กำหนดค่า:
 
 ```bash
 terminalizer record demo -c config.yml
 ```
 
-# Issues
+# ปัญหาที่พบ
 
 > error while loading shared libraries: libXss.so.1: cannot open shared object file: No such file or directory
 
-Solution:
+วิธีแก้ไข:
 
 ```bash
 sudo yum install libXScrnSaver
@@ -451,11 +494,31 @@ sudo yum install libXScrnSaver
 
 > error while loading shared libraries: libgconf-2.so.4: cannot open shared object file: No such file or directory
 
-Solution:
+วิธีแก้ไข:
 
 ```bash
 sudo apt-get install libgconf-2-4
 ```
+
+> node-gyp compilation errors บน Windows
+
+วิธีแก้ไข:
+
+```bash
+# ใช้ version ที่แก้ไขแล้วนี้ หรือ
+npm install --ignore-scripts
+# หรือใช้บน WSL/Linux
+```
+
+# ลิขสิทธิ์
+
+โครงการนี้อยู่ภายใต้ลิขสิทธิ์ MIT - ดูรายละเอียดในไฟล์ [LICENSE](LICENSE)
+
+---
+
+Made with ❤️ by [Fares Softi](https://www.faressoft.net)
+
+แปลเป็นภาษาไทยและปรับปรุงสำหรับ Windows โดย GitHub Copilot
 
 > Error: EACCES: permission denied, access '/usr/local/lib'
 

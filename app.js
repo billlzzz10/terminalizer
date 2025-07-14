@@ -41,7 +41,8 @@ di.require('progress', 'ProgressBar');
 di.require('gif-encoder', 'GIFEncoder');
 di.require('inquirer');
 
-di.set('pty', require('@homebridge/node-pty-prebuilt-multiarch'));
+// di.set('pty', require('@homebridge/node-pty-prebuilt-multiarch'));
+di.set('pty', null); // Temporarily disabled for Windows compatibility
 di.set('PNG', require('pngjs').PNG);
 di.set('spawn', require('child_process').spawn);
 di.set('utility', require('./utility.js'));

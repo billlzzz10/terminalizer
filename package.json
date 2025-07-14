@@ -14,8 +14,8 @@
     "terminalizer": "bin/app.js"
   },
   "scripts": {
-    "dev": "NODE_ENV=development webpack --watch",
-    "build": "NODE_ENV=production webpack --progress",
+    "dev": "webpack --watch --mode=development",
+    "build": "webpack --progress --mode=production",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -41,14 +41,13 @@
     "pty"
   ],
   "dependencies": {
-    "@homebridge/node-pty-prebuilt-multiarch": "^0.11.14",
     "async": "^2.6.3",
     "async-promises": "^0.2.2",
     "axios": "^1.7.5",
     "chalk": "^2.4.2",
     "death": "^1.1.0",
     "deepmerge": "^2.2.1",
-    "electron": "^25.2.0",
+    "electron": "^25.9.8",
     "fs-extra": "^5.0.0",
     "gif-encoder": "^0.6.1",
     "inquirer": "^6.5.2",
